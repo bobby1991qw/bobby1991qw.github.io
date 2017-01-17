@@ -6,17 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Tag1 | 喝茶的螃蟹</title>
+  <title>canvas动画与交互（二） | 喝茶的螃蟹</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="喝茶的螃蟹">
-<meta property="og:url" content="http://yoursite.com/tags/Tag1/index.html">
+  <meta name="description" content="第一部分说了写canvas的基础API，这一篇就拿这些API来练习一些简单动画。闲话不多说，这就开始了
+匀速直线运动这应该是是最简单的运动了吧。流程在上一篇也讲过了，不停的更新x值，重绘canvas就可以了
+代码如下:
+直线运动非常简单。不停的改变小球的x值，重绘canvas就可以了。要注意的是，我在绘制小球时，圆心一直在[0, 0]。通过translate来改变小球的位置。在小球到达canvas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas动画与交互（二）">
+<meta property="og:url" content="http://yoursite.com/2017/01/11/canvas动画与交互（二）/index.html">
 <meta property="og:site_name" content="喝茶的螃蟹">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="第一部分说了写canvas的基础API，这一篇就拿这些API来练习一些简单动画。闲话不多说，这就开始了
+匀速直线运动这应该是是最简单的运动了吧。流程在上一篇也讲过了，不停的更新x值，重绘canvas就可以了
+代码如下:
+直线运动非常简单。不停的改变小球的x值，重绘canvas就可以了。要注意的是，我在绘制小球时，圆心一直在[0, 0]。通过translate来改变小球的位置。在小球到达canvas">
+<meta property="og:updated_time" content="2017-01-17T14:31:34.311Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="喝茶的螃蟹">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:title" content="canvas动画与交互（二）">
+<meta name="twitter:description" content="第一部分说了写canvas的基础API，这一篇就拿这些API来练习一些简单动画。闲话不多说，这就开始了
+匀速直线运动这应该是是最简单的运动了吧。流程在上一篇也讲过了，不停的更新x值，重绘canvas就可以了
+代码如下:
+直线运动非常简单。不停的改变小球的x值，重绘canvas就可以了。要注意的是，我在绘制小球时，圆心一直在[0, 0]。通过translate来改变小球的位置。在小球到达canvas">
   
     <link rel="alternative" href="/atom.xml" title="喝茶的螃蟹" type="application/atom+xml">
   
@@ -57,7 +67,9 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/categories/随笔/">随笔</a></li>
+	        
+				<li><a href="/categories/HTML/">html</a></li>
 	        
 			</ul>
 		</nav>
@@ -76,6 +88,8 @@
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/bobby1991qw" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="jianshu" target="_blank" href="http://www.jianshu.com/users/0211c99d1cbc/timeline" title="jianshu"><i class="icon-jianshu"></i></a>
 		        
 			</div>
 		</nav>
@@ -105,6 +119,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -112,16 +128,20 @@
 					
 						<a class="github" target="_blank" href="https://github.com/bobby1991qw" title="github"><i class="icon-github"></i></a>
 			        
+						<a class="jianshu" target="_blank" href="http://www.jianshu.com/users/0211c99d1cbc/timeline" title="jianshu"><i class="icon-jianshu"></i></a>
+			        
 				</div>
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories/随笔/">随笔</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/categories/HTML/">html</a></li>
 		        
 				</ul>
 			</nav>
@@ -136,64 +156,119 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-canvas动画与交互（二）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/09/测试文章/" class="archive-article-date">
-  	<time datetime="2017-01-09T12:57:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-09</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/09/测试文章/">测试文章</a>
+    <h1 class="article-title" itemprop="name">
+      canvas动画与交互（二）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/01/11/canvas动画与交互（二）/" class="archive-article-date">
+  	<time datetime="2017-01-11T13:08:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第一部分说了写canvas的基础API，这一篇就拿这些API来练习一些简单动画。<br>闲话不多说，这就开始了</p>
+<h2 id="匀速直线运动"><a href="#匀速直线运动" class="headerlink" title="匀速直线运动"></a>匀速直线运动</h2><p>这应该是是最简单的运动了吧。流程在上一篇也讲过了，不停的更新x值，重绘canvas就可以了</p>
+<p>代码如下:</p>
+<p><script src="http://runjs.cn/gist/w2yee5xq/all/emacs"></script><br>直线运动非常简单。不停的改变小球的x值，重绘canvas就可以了。<br>要注意的是，我在绘制小球时，圆心一直在[0, 0]。通过translate来改变小球的位置。在小球到达canvas的右边时，我选择让它从左边重新出现，你也可以让它反弹。</p>
+<h2 id="圆周运动"><a href="#圆周运动" class="headerlink" title="圆周运动"></a>圆周运动</h2><p>在圆周运动中会用到两个新的公式。 </p>
+<pre><code>1. x = centerX + cos(angle) * radius
+2. y = centerY + sin(angle) * radius
+</code></pre><p>其中centerX,centerY表示圆心的位置， angle表示小球与圆心的夹角， radius为圆的半径。<br>根据直角三角形的边角关系：对边 = 斜边 <em> cos（角度）, 临边 = 斜边 </em> sin(角度)。</p>
+<p>由于大部分代码和上面重复，这里只写出不同的部分。<a href="http://sandbox.runjs.cn/show/2axlrplj" target="_blank" rel="external">在线演示</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">translation</span></span>() &#123;</div><div class="line">    var ball = new Ball(20, 0xff0000),</div><div class="line">		centerX = canvas.width / 2,</div><div class="line">		centerY = canvas.height / 2,</div><div class="line">        angle = 0,  // 初始角度</div><div class="line">		vr = 0.01;  // 角速度</div><div class="line"></div><div class="line">    ball.x = canvas.width / 4;</div><div class="line">    ball.y = canvas.height / 2; 				</div><div class="line">	</div><div class="line">	var r = canvas.width / 4; //圆周运动的半径</div><div class="line">	</div><div class="line">    (<span class="keyword">function</span> <span class="function"><span class="title">drawFrame</span></span>() &#123;</div><div class="line">        ctx.clearRect(0, 0, canvas.width, canvas.height);      						</div><div class="line">			</div><div class="line">		ball.x = centerX + Math.cos(angle) * r; // Math.cos(angle) * r 获取小球相对于原点在X轴的偏移量</div><div class="line">		ball.y = centerY + Math.sin(angle) * r; // Math.sin(angle) * r 获取小球相对于原点在Y轴的偏移量</div><div class="line">		angle += vr;</div><div class="line">			</div><div class="line">        ball.draw(ctx);</div><div class="line"></div><div class="line">        window.requestAnimationFrame(drawFrame);</div><div class="line">    &#125;)();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>相对于直线运动，圆周运动多了y轴的变化。观察一下圆周运动, 会发现一些规律：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 当X轴速度最大时，Y轴速度最小</div><div class="line">2. 相对于中心点，圆周运动在X轴与Y轴的振幅相同</div></pre></td></tr></table></figure></p>
+<p>如果想要做一个椭圆运动呢？你知道怎么做了吧…</p>
+<h2 id="公式小结"><a href="#公式小结" class="headerlink" title="公式小结"></a>公式小结</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1. 直线运动</div><div class="line">    ball.x += ball.vx;</div><div class="line">    ball.y += ball.vy;</div><div class="line"></div><div class="line">2. 圆周运动</div><div class="line">    ball.x = centerX + cos(angle) * r;</div><div class="line">    ball.y = centerY + sin(angle) * r;</div></pre></td></tr></table></figure>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>第二部分讲了两个简单动画，下部分会加入加速度和旋转的概念。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tag1</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tag2</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">canvas</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/js/" class="article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  <div style="margin:30px">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="post-canvas动画与交互（二）" data-title="canvas动画与交互（二）" data-url="2017/01/11/canvas动画与交互（二）/index.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"drinkingcrab"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/01/10/canvas动画与交互（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">canvas动画与交互（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -216,9 +291,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		root: "/",
@@ -274,11 +349,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Tag1</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Tag2</a>
+                <a href="javascript:void(0)" class="js-tag color2">canvas</a>
               </li>
             
             <div class="clearfix"></div>

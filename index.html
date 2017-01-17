@@ -57,7 +57,9 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/categories/随笔/">随笔</a></li>
+	        
+				<li><a href="/categories/HTML/">html</a></li>
 	        
 			</ul>
 		</nav>
@@ -76,6 +78,8 @@
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/bobby1991qw" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="jianshu" target="_blank" href="http://www.jianshu.com/users/0211c99d1cbc/timeline" title="jianshu"><i class="icon-jianshu"></i></a>
 		        
 			</div>
 		</nav>
@@ -105,6 +109,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -112,16 +118,20 @@
 					
 						<a class="github" target="_blank" href="https://github.com/bobby1991qw" title="github"><i class="icon-github"></i></a>
 			        
+						<a class="jianshu" target="_blank" href="http://www.jianshu.com/users/0211c99d1cbc/timeline" title="jianshu"><i class="icon-jianshu"></i></a>
+			        
 				</div>
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories/随笔/">随笔</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/categories/HTML/">html</a></li>
 		        
 				</ul>
 			</nav>
@@ -138,128 +148,40 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-hhh" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-canvas动画与交互（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/09/hhh/">hhh</a>
+      <a class="article-title" href="/2017/01/11/canvas动画与交互（二）/">canvas动画与交互（二）</a>
     </h1>
   
 
         
-        <a href="/2017/01/09/hhh/" class="archive-article-date">
-  	<time datetime="2017-01-09T14:28:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-09</time>
+        <a href="/2017/01/11/canvas动画与交互（二）/" class="archive-article-date">
+  	<time datetime="2017-01-11T13:08:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-      
+        <p>第一部分说了写canvas的基础API，这一篇就拿这些API来练习一些简单动画。<br>闲话不多说，这就开始了</p>
+<h2 id="匀速直线运动"><a href="#匀速直线运动" class="headerlink" title="匀速直线运动"></a>匀速直线运动</h2><p>这应该是是最简单的运动了吧。流程在上一篇也讲过了，不停的更新x值，重绘canvas就可以了</p>
+<p>代码如下:</p>
+<p><script src="http://runjs.cn/gist/w2yee5xq/all/emacs"></script><br>直线运动非常简单。不停的改变小球的x值，重绘canvas就可以了。<br>要注意的是，我在绘制小球时，圆心一直在[0, 0]。通过translate来改变小球的位置。在小球到达canvas的右边时，我选择让它从左边重新出现，你也可以让它反弹。</p>
+<h2 id="圆周运动"><a href="#圆周运动" class="headerlink" title="圆周运动"></a>圆周运动</h2><p>在圆周运动中会用到两个新的公式。 </p>
+<pre><code>1. x = centerX + cos(angle) * radius
+2. y = centerY + sin(angle) * radius
+</code></pre><p>其中centerX,centerY表示圆心的位置， angle表示小球与圆心的夹角， radius为圆的半径。<br>根据直角三角形的边角关系：对边 = 斜边 <em> cos（角度）, 临边 = 斜边 </em> sin(角度)。</p>
+<p>由于大部分代码和上面重复，这里只写出不同的部分。<a href="http://sandbox.runjs.cn/show/2axlrplj" target="_blank" rel="external">在线演示</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">translation</span></span>() &#123;</div><div class="line">    var ball = new Ball(20, 0xff0000),</div><div class="line">		centerX = canvas.width / 2,</div><div class="line">		centerY = canvas.height / 2,</div><div class="line">        angle = 0,  // 初始角度</div><div class="line">		vr = 0.01;  // 角速度</div><div class="line"></div><div class="line">    ball.x = canvas.width / 4;</div><div class="line">    ball.y = canvas.height / 2; 				</div><div class="line">	</div><div class="line">	var r = canvas.width / 4; //圆周运动的半径</div><div class="line">	</div><div class="line">    (<span class="keyword">function</span> <span class="function"><span class="title">drawFrame</span></span>() &#123;</div><div class="line">        ctx.clearRect(0, 0, canvas.width, canvas.height);      						</div><div class="line">			</div><div class="line">		ball.x = centerX + Math.cos(angle) * r; // Math.cos(angle) * r 获取小球相对于原点在X轴的偏移量</div><div class="line">		ball.y = centerY + Math.sin(angle) * r; // Math.sin(angle) * r 获取小球相对于原点在Y轴的偏移量</div><div class="line">		angle += vr;</div><div class="line">			</div><div class="line">        ball.draw(ctx);</div><div class="line"></div><div class="line">        window.requestAnimationFrame(drawFrame);</div><div class="line">    &#125;)();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>相对于直线运动，圆周运动多了y轴的变化。观察一下圆周运动, 会发现一些规律：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 当X轴速度最大时，Y轴速度最小</div><div class="line">2. 相对于中心点，圆周运动在X轴与Y轴的振幅相同</div></pre></td></tr></table></figure></p>
+<p>如果想要做一个椭圆运动呢？你知道怎么做了吧…</p>
+<h2 id="公式小结"><a href="#公式小结" class="headerlink" title="公式小结"></a>公式小结</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1. 直线运动</div><div class="line">    ball.x += ball.vx;</div><div class="line">    ball.y += ball.vy;</div><div class="line"></div><div class="line">2. 圆周运动</div><div class="line">    ball.x = centerX + cos(angle) * r;</div><div class="line">    ball.y = centerY + sin(angle) * r;</div></pre></td></tr></table></figure>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>第二部分讲了两个简单动画，下部分会加入加速度和旋转的概念。</p>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/09/hhh/">阅读全文</a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-测试文章2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/09/测试文章2/">测试文章2</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/09/测试文章2/" class="archive-article-date">
-  	<time datetime="2017-01-09T14:24:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="因为爱情"><a href="#因为爱情" class="headerlink" title="因为爱情"></a>因为爱情</h3><p>哈哈哈</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/09/测试文章2/">阅读全文</a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-测试文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/09/测试文章/">测试文章</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/09/测试文章/" class="archive-article-date">
-  	<time datetime="2017-01-09T12:57:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="哈哈哈"><a href="#哈哈哈" class="headerlink" title="哈哈哈"></a>哈哈哈</h2>
       
 
       
@@ -272,21 +194,120 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tag1</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tag2</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">canvas</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/js/" class="article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/09/测试文章/">阅读全文</a>
+          <a class="article-more-a" href="/2017/01/11/canvas动画与交互（二）/">阅读全文</a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-canvas动画与交互（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/10/canvas动画与交互（一）/">canvas动画与交互（一）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/10/canvas动画与交互（一）/" class="archive-article-date">
+  	<time datetime="2017-01-10T12:10:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从学习前端开始就一直对canvas很感兴趣，特别羡慕那些使用canvas制作各种动画和游戏的大神们。但是由于各种各样的原因，一直没有去研究。<br>前段时间公司采购书籍，我就报了一本《HTML5+javascript动画基础》，正好最近手头任务不多，就拿出来学习一二。<br>我会将学习与思考的一些内容分几部分写出来，算是做个记录和备忘吧。</p>
+<p>今天是第一部分 <strong>《canvas基础》</strong></p>
+<h2 id="获取绘图环境"><a href="#获取绘图环境" class="headerlink" title="获取绘图环境"></a>获取绘图环境</h2><p>一开始当然是获取canvas绘图环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var canvas = document.getElementById(<span class="string">'canvas'</span>),</div><div class="line">    ctx = canvas.getContext(<span class="string">'2d'</span>);</div></pre></td></tr></table></figure>
+<p>canvas是canvas元素，而ctx就是我们之后的绘图环境上下文了。这里有个地方要注意的是在设置canvas宽度和高的时候，一定要用canvas的width和height属性，而不能用css设置宽高，不然画出的图像大小会有bug</p>
+<h2 id="基础API"><a href="#基础API" class="headerlink" title="基础API"></a>基础API</h2><p>叫API可能不太准确，在这里会列出比较常用的属性和方法</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ctx.fillStyle   //填充的样式，允许的值为颜色，渐变或者模式</div><div class="line">ctx.strokeStyle //描边的样式，允许的值同fillStyle</div><div class="line">ctx.lineWidth   //线条宽度</div><div class="line">ctx.globalAlpha     //透明度</div><div class="line">ctx.globalCompositeOperation //合成方式</div></pre></td></tr></table></figure>
+<p>以PS为例</p>
+<pre><code>- fillStyle可以理解为油漆桶的样式，可以是纯颜色或者渐变，在这里还有模式
+- strokeStyle可以理解为笔刷的样式
+- globalCompositeOperation可以理解为图层的混合模式，表示图层见的合成方法
+</code></pre><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ctx.createLinearGradient()  //创建线性渐变</div><div class="line">ctx.createRadialGradient()  //创建径向渐变</div><div class="line">ctx.beginPath()     //开始一个路径</div><div class="line">ctx.closePath()     //闭合一个路径</div><div class="line">ctx.fillRect()      //填充一个矩形</div><div class="line">ctx.strokeRect()    //描边一个矩形</div><div class="line">ctx.clearRect()     //清楚一个矩形</div><div class="line">ctx.moveTo()        //移动到指定的位置，不产生路径</div><div class="line">ctx.lineTo()        //移动到指定的位置，产生路径</div><div class="line">ctx.arc()           //绘制一个圆或圆弧的路径</div><div class="line">ctx.fill()          //填充现有路径</div><div class="line">ctx.stroke()        //描边现有路径</div><div class="line">ctx.drawImage()     //绘制一张图片</div></pre></td></tr></table></figure>
+<p>以上方法中所有绘制路径的方法都不会立刻在画布上绘制图形，直到调用fill或者stroke方法。<br>moveTo与lineTo的区别在于是否产生路径，lineTo像是在纸上话一条线，而moveTo像是提起笔移动到一个位置。<br>clearRect常被用来清除画布，ctx.clearRect(0, 0, canvas.width, canvas.height)。另一种方法是重新设置canvas.widht。</p>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><p>既然是动画，那当然需要动起来。那个最简单的例子来说，一个小球重屏幕的左边移动到屏幕的右边，代码的流程应该是：</p>
+<pre><code>1. 在画布左边绘制一个小球
+2. 清除原来的小球，在往右边几个像素绘制一个新的小球
+</code></pre><p>反复循环第二步，直到小球到达屏幕的右边，伪代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">创建小球</div><div class="line">设置小球位置</div><div class="line">在画布上绘制小球</div><div class="line">循环</div><div class="line">    设置小球的新位置</div><div class="line">    清空画布</div><div class="line">    在画布上绘制新的小球</div><div class="line">结束循环</div></pre></td></tr></table></figure>
+<p>简单说canvas动画的本质就是不停的清空画布，然后重绘。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>第一部分就到这里结束吧。都还是一些理论基础，下部分会讲几个简单的动画</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">canvas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/js/" class="article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/10/canvas动画与交互（一）/">阅读全文</a>
         </p>
       
 
@@ -444,11 +465,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Tag1</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Tag2</a>
+                <a href="javascript:void(0)" class="js-tag color2">canvas</a>
               </li>
             
             <div class="clearfix"></div>
