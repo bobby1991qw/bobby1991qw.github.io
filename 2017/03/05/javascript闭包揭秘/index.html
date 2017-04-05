@@ -6,17 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>喝茶的螃蟹</title>
+  <title>javascript闭包揭秘 | 喝茶的螃蟹</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="喝茶的螃蟹">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="闭包是在学习javascript的过程中不可规避的一道屏障。掌握了闭包，才有可能从初级想中级迈进。自从学习js以来，我也看了许多篇关于闭包的文章，但是一致没能完全理解闭包到底是什么？它显得如此神秘，像是深林中的蓝精灵。在经过无数次的实验和查找书籍之后，终于对闭包有了一个较为清晰的理解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript闭包揭秘">
+<meta property="og:url" content="http://yoursite.com/2017/03/05/javascript闭包揭秘/index.html">
 <meta property="og:site_name" content="喝茶的螃蟹">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="闭包是在学习javascript的过程中不可规避的一道屏障。掌握了闭包，才有可能从初级想中级迈进。自从学习js以来，我也看了许多篇关于闭包的文章，但是一致没能完全理解闭包到底是什么？它显得如此神秘，像是深林中的蓝精灵。在经过无数次的实验和查找书籍之后，终于对闭包有了一个较为清晰的理解。">
+<meta property="og:image" content="http://yoursite.com/img/闭包_1.png">
+<meta property="og:image" content="http://yoursite.com/img/闭包_2.png">
+<meta property="og:image" content="http://yoursite.com/img/闭包_3.png">
+<meta property="og:image" content="http://yoursite.com/img/闭包_4.png">
+<meta property="og:updated_time" content="2017-04-05T15:22:55.942Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="喝茶的螃蟹">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:title" content="javascript闭包揭秘">
+<meta name="twitter:description" content="闭包是在学习javascript的过程中不可规避的一道屏障。掌握了闭包，才有可能从初级想中级迈进。自从学习js以来，我也看了许多篇关于闭包的文章，但是一致没能完全理解闭包到底是什么？它显得如此神秘，像是深林中的蓝精灵。在经过无数次的实验和查找书籍之后，终于对闭包有了一个较为清晰的理解。">
+<meta name="twitter:image" content="http://yoursite.com/img/闭包_1.png">
   
     <link rel="alternative" href="/atom.xml" title="喝茶的螃蟹" type="application/atom+xml">
   
@@ -146,16 +152,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-javascript闭包揭秘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-javascript闭包揭秘" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/05/javascript闭包揭秘/">javascript闭包揭秘</a>
+    <h1 class="article-title" itemprop="name">
+      javascript闭包揭秘
     </h1>
   
 
@@ -169,8 +173,52 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>闭包是在学习javascript的过程中不可规避的一道屏障。掌握了闭包，才有可能从初级想中级迈进。自从学习js以来，我也看了许多篇关于闭包的文章，但是一致没能完全理解闭包到底是什么？它显得如此神秘，像是深林中的蓝精灵。在经过无数次的实验和查找书籍之后，终于对闭包有了一个较为清晰的理解。</p>
-        
-          <a class="article-more-a" href="/2017/03/05/javascript闭包揭秘/#more">展开全文</a>
+<a id="more"></a>
+<p><strong><h3 style="color: #00b0f0">1. 什么是闭包</h3></strong></p>
+<p>就像一万个读者心中有一万个法姆雷特，对于闭包的理解，大家也各不相同。大致可以分为两种意见：</p>
+<blockquote>
+<ol>
+<li>在函数A内创建函数B，就形成了闭包</li>
+<li>创建一个函数就形成了闭包</li>
+</ol>
+</blockquote>
+<p>我个人是比较倾向于第二种说法的。</p>
+<p>在《Javascript高级程序设计》中关于闭包的解释提到：</p>
+<blockquote>
+<p>闭包是指<strong><em>有权访问</em></strong>另一个函数作用于中<strong><em>变量</em></strong>的函数。创建函数的常见方式，就是在一个函数内部创建另一个函数。</p>
+</blockquote>
+<p>在《你不知道的Javascript》中关于闭包是这样说的：</p>
+<blockquote>
+<p>当函数可以记住并<strong><em>访问所在的词法作用域</em></strong>时，就产生了闭包</p>
+</blockquote>
+<p>什么时词法作用域？简单的说，词法作用域就是定义在词法阶段的作用域（好像时废话），它决定了你能访问哪些变量。当然也有办法可以欺骗词法作用域，那就是使用with或者eval。也正是由于这样做时候作用域混乱，会导致各种不易发现的bug，因此各大规范都不建议使用with和eval。这中题外话就按住不表。</p>
+<p><strong><h3 style="color: #00b0f0">2. 闭包的本质</h3></strong></p>
+<p>上面两种解释，都提到了可访问的变量。而函数的可访问变量由词法作用域链决定。所以，简单的说：闭包的本质就是词法作用域链查找变量的过程。理解闭包就是理解<strong><em>词法作用域链</em></strong>。那么，词法作用域链又是什么？既然时<strong><em>链</em></strong>，那么必然是一个类似链表的结构。假设有函数A，函数A内部有函数B。<br>那么函数B的作用域链为： </p>
+<blockquote>
+<p><strong><em>B -&gt; A -&gt; Global</em></strong></p>
+</blockquote>
+<p>函数A的作用域链为：</p>
+<blockquote>
+<p><strong><em>A -&gt; Global</em></strong></p>
+</blockquote>
+<p><strong><h3 style="color: #00b0f0">3. 动手看看</h3></strong></p>
+<p>来看个小实验：<br><img src="/img/闭包_1.png" alt="Alt 闭包_1"><br>可以看到右侧的Scope部分的作用域链： <strong><em>Local -&gt; Global</em></strong>，其中Local包括几个属性：<strong><em>B, a_a, a_b, this</em></strong>，而Global指向window</p>
+<p><img src="/img/闭包_2.png" alt="Alt 闭包_2"><br>函数B的作用域链为: <strong><em>Local -&gt; A -&gt; Global</em></strong>，可以看到在函数B种包含了函数A的变量a_b。</p>
+<p>从上面的实验可以看出：</p>
+<blockquote>
+<ol>
+<li>词法作用域链是从函数本身开始，向上级直到指向Global为止</li>
+<li>词法作用域内的可访问变量包括参数，变量和this</li>
+</ol>
+</blockquote>
+<p>再来看另一个经典的实验<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> result = []</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</div><div class="line">        result[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(i) &#125;</div><div class="line">    &#125;    </div><div class="line"></div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> a = A();</div></pre></td></tr></table></figure></p>
+<p>大家都知道全都会输出5。让我们从作用域链的角度来解析试下原因。a[0]~a[4]为匿名函数，Local作用域内没有可访问的变量；上级作用域为函数A，可访问的变量为result和i。当执行a<a href="">0</a>时，函数A已经运行完毕，由于循环，i已经赋值为5，因此输出为5.</p>
+<p>要解决问题也很简单，将i引入到匿名函数中即可。从上一个实验的结论2中我们知道，作用域中可访问的变量有参数，变量和this。这里的变量指的是函数内部定义的局部变量，因此不可以用来解决这个问题，那么智能使用参数和this了。</p>
+<p><img src="/img/闭包_3.png" alt="Alt 闭包_3"><br>上图中使用bind来强制改变this；从而将i引入，而最后的输出和预想的略有不同，应该是bind的机制要求this必须为object（无责任猜想），或者有哪位大大可以解释一下的？</p>
+<p><img src="/img/闭包_4.png" alt="Alt 闭包_4"><br>这里使用了匿名函数（alias： nousB）将i引入。同时可以知道，这里的作用域链其实是被改变了的，在匿名函数与函数A之间多了一个作用域nousB，而i实际是在nousB的作用域内。</p>
+<p><strong><h3 style="color: #00b0f0">4. 结语</h3></strong></p>
+<p>闭包在javascript的使用中颇为频繁，在各种库与框架中都有出现。它帮我们解决了很多问题，但它本身也并不是完美的：由于作用域链的保存也是需要占用空间的，因此，在大量使用闭包的时候会有内存占用偏高的情况；同时，若作用域链过长，而查找的变量在较外层甚至是Global上时，查找效率较慢。</p>
+<p><strong><em>闭包虽好，可不要贪心哟</em></strong></p>
         
       
 
@@ -208,10 +256,6 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/05/javascript闭包揭秘/">阅读全文</a>
-        </p>
-      
 
       
       <div class="clearfix"></div>
@@ -219,7 +263,35 @@
   </div>
 </article>
 
+  <div style="margin:30px">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="post-javascript闭包揭秘" data-title="javascript闭包揭秘" data-url="2017/03/05/javascript闭包揭秘/index.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"drinkingcrab"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/09/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
@@ -227,66 +299,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/09/hello-world/">Hello World</a>
-    </h1>
+    <div class="duoshuo"></div>
   
 
-        
-        <a href="/2017/01/09/hello-world/" class="archive-article-date">
-  	<time datetime="2017-01-09T12:50:09.188Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-        
-      
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/09/hello-world/">阅读全文</a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-  
 
 
           </div>
@@ -308,8 +324,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

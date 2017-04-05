@@ -151,9 +151,7 @@ Quick">
           </div>
           <div id="js-content" class="content-ll">
             <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">    
-    
-    
+  <div class="article-inner">
     
       <header class="article-header">
         
@@ -221,11 +219,11 @@ var duoshuoQuery = {short_name:"drinkingcrab"};
 
 <nav id="article-nav">
   
-    <a href="/2017/01/10/canvas动画与交互（一）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/03/05/javascript闭包揭秘/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          canvas动画与交互（一）
+          javascript闭包揭秘
         
       </div>
     </a>
@@ -324,6 +322,18 @@ var duoshuoQuery = {short_name:"drinkingcrab"};
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">canvas</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">动画</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">闭包</a>
               </li>
             
             <div class="clearfix"></div>
@@ -450,5 +460,12 @@ var duoshuoQuery = {short_name:"drinkingcrab"};
 
 </div>
   </div>
+  <script>
+    var title = document.title,
+      hiddenTitle = '你快回来~ 我一人承受不来！！';
+    document.addEventListener('visibilitychange', function() {
+      document.title = document.hidden ? hiddenTitle : title;
+    })
+  </script>
 </body>
 </html>

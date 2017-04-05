@@ -148,9 +148,7 @@
           </div>
           <div id="js-content" class="content-ll">
             <article id="page-undefined" class="article article-type-page " itemscope itemprop="blogPost">
-  <div class="article-inner">    
-    
-    
+  <div class="article-inner">
     
       <header class="article-header">
         
@@ -299,6 +297,18 @@ var duoshuoQuery = {short_name:"drinkingcrab"};
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">canvas</a>
               </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">动画</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">闭包</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -424,5 +434,12 @@ var duoshuoQuery = {short_name:"drinkingcrab"};
 
 </div>
   </div>
+  <script>
+    var title = document.title,
+      hiddenTitle = '你快回来~ 我一人承受不来！！';
+    document.addEventListener('visibilitychange', function() {
+      document.title = document.hidden ? hiddenTitle : title;
+    })
+  </script>
 </body>
 </html>
