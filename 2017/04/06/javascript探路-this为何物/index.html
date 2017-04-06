@@ -6,17 +6,51 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: javascript | 喝茶的螃蟹</title>
+  <title>javascript探路:this为何物 | 喝茶的螃蟹</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="喝茶的螃蟹">
-<meta property="og:url" content="http://yoursite.com/categories/javascript/index.html">
+  <meta name="description" content="“我是谁，我在哪里，谁在打我”，最近在打《守望屁股》的途中经常听到这样的梗，这对本我的探寻似乎在写代码的途中也经常碰到。不信？你是否遇到过这样的错误
+
+Uncatched TypeError: cannot read property ‘xxx’ of undefined
+
+或者
+
+Uncatched TypeError: xxx.yyy is not a function 
+
+回来一查才发现是t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript探路:this为何物">
+<meta property="og:url" content="http://yoursite.com/2017/04/06/javascript探路-this为何物/index.html">
 <meta property="og:site_name" content="喝茶的螃蟹">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="“我是谁，我在哪里，谁在打我”，最近在打《守望屁股》的途中经常听到这样的梗，这对本我的探寻似乎在写代码的途中也经常碰到。不信？你是否遇到过这样的错误
+
+Uncatched TypeError: cannot read property ‘xxx’ of undefined
+
+或者
+
+Uncatched TypeError: xxx.yyy is not a function 
+
+回来一查才发现是t">
+<meta property="og:image" content="http://yoursite.com/img/this_1.png">
+<meta property="og:image" content="http://yoursite.com/img/this_2.png">
+<meta property="og:image" content="http://yoursite.com/img/this_3.png">
+<meta property="og:image" content="http://yoursite.com/img/this_4.png">
+<meta property="og:image" content="http://yoursite.com/img/this_5.png">
+<meta property="og:image" content="http://yoursite.com/img/this_6.png">
+<meta property="og:image" content="http://yoursite.com/img/this_7.png">
+<meta property="og:image" content="http://yoursite.com/img/this_8.png">
+<meta property="og:updated_time" content="2017-04-06T14:59:17.127Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="喝茶的螃蟹">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:title" content="javascript探路:this为何物">
+<meta name="twitter:description" content="“我是谁，我在哪里，谁在打我”，最近在打《守望屁股》的途中经常听到这样的梗，这对本我的探寻似乎在写代码的途中也经常碰到。不信？你是否遇到过这样的错误
+
+Uncatched TypeError: cannot read property ‘xxx’ of undefined
+
+或者
+
+Uncatched TypeError: xxx.yyy is not a function 
+
+回来一查才发现是t">
+<meta name="twitter:image" content="http://yoursite.com/img/this_1.png">
   
     <link rel="alternative" href="/atom.xml" title="喝茶的螃蟹" type="application/atom+xml">
   
@@ -146,36 +180,76 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-javascript探路-this为何物" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/06/javascript探路-this为何物/" class="archive-article-date">
-  	<time datetime="2017-04-06T13:34:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/06/javascript探路-this为何物/">javascript探路:this为何物</a>
+    <h1 class="article-title" itemprop="name">
+      javascript探路:this为何物
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/04/06/javascript探路-this为何物/" class="archive-article-date">
+  	<time datetime="2017-04-06T13:34:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>“我是谁，我在哪里，谁在打我”，最近在打《守望屁股》的途中经常听到这样的梗，这对本我的探寻似乎在写代码的途中也经常碰到。不信？你是否遇到过这样的错误</p>
+<blockquote>
+<p>Uncatched TypeError: cannot read property ‘xxx’ of undefined</p>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<p>Uncatched TypeError: xxx.yyy is not a function </p>
+</blockquote>
+<p>回来一查才发现是<code>this.xxx</code>报错了。那么this为何这么神秘？它到底是什么？</p>
+<a id="more"></a>
+<p><strong><h3 style="color: #00b0f0">1. this为何物</h3></strong></p>
+<p>对于this大家必然部陌生，但是对于到底this表示什么，大家都明白吗？学过java，c#这类语言的都知道，this指向当前类的对象。但是在javascript中，this却并不是这么简单的。this是函数作用域中的一个变量，意为函数执行上下文。</p>
+<p><strong><h3 style="color: #00b0f0">2. 如何确定this</h3></strong></p>
+<p>不像c#，javascript中的this是在函数执行时动态赋值的。函数的不同调用方式会导致不同的this赋值，关于函数的调用方式有如下4种</p>
+<ol>
+<li>作为函数调用</li>
+<li>作为方法调用</li>
+<li>作为构造器调用</li>
+<li>call，apply和bind调用</li>
+</ol>
+<p>下面我们来具体看看着4种方式的this时如何确定的</p>
+<p><strong><h5>作为函数调用</h5></strong></p>
+<p>咋一看好像是巨废话（函数不作为函数调用？那要作为什么？）。这里的第二个“函数”意为，函数不挂靠在某个对象下，而是在全局变量中（其实window下的同名属性也是可以引用该函数的）。在作为函数调用时，this指向window（非严格模式下，在严格模式下为undefined）。让我们来验证一下：</p>
+<p><img src="/img/this_1.png" alt="Alt this_1"><br>可以看到<code>console.log(this)</code>打印的时window。</p>
+<p><img src="/img/this_2.png" alt="Alt this_2"><br>而在严格模式下，this变为了undefined。</p>
+<p><strong><h5>作为方法调用</h5></strong></p>
+<p>函数作为方法调用，意为函数挂载在对象的某个属性上。调用时，this指向该对象。</p>
+<p><img src="/img/this_3.png" alt="Alt this_3"><br>打印的this为对象a。简单的查找方法就是：作为方法调用是aaa.XXX()中的this指向.之前的aaa。其实你会发现，<strong><em>作为函数调用</em></strong>可以看作<strong><em>作为方法调用</em></strong>的一种特殊情况，因为全局函数x可以使用window.x()调用到。</p>
+<p><strong><h5>作为构造器调用</h5></strong></p>
+<p>作为构造器调用，就是这种用法<code>new A()</code>。这里的this指向什么呢？要先从<code>new A()</code>的执行流程开始说起。当使用new关键字调用一个函数时，会先产生一个对象o,接着将this指向o，然后执行函数体里的语句。如果函数体里没有<code>return xxx</code>语句，则返回对象o，否则返回xxx。</p>
+<p><img src="/img/this_4.png" alt="Alt this_4"><br>可以看到，没有显式返回时，返回的对象上有属性name和age，其值为函数体内的赋值。</p>
+<p><img src="/img/this_5.png" alt="Alt this_5"><br>而显式返回s时，可以看到s.age和s.name都不是函数体内this的赋值，s.a则指向函数A中的this。</p>
+<p><strong><h5>call,apply和bind调用</h5></strong></p>
+<p>call和apply方法挂载在Function.prototype对象上。作用是强制指定方法的this和函数调用时参数args。这两个函数的不同点是：call函数提供的args是以arg1,arg2…这样的形式提供的；而apply函数提供的args则是以数组的方式提供。而bind则是柯里化函数，返回一个强制绑定this的目标函数。</p>
+<p><img src="/img/this_6.png" alt="Alt this_6"><br>可以看到<code>func()</code>打印的test为window.test，而<code>func.call(a)</code>和<code>func.apply(a)</code>打印的test为a.test。</p>
+<p><strong><h3 style="color: #00b0f0">3. 复杂情况</h3></strong></p>
+<p>上述4种调用方式都很容易确定this的值，那么在更加复杂的情况下会是怎样的呢？让我们来看一看。</p>
+<p><strong><h5>new和bind同时使用</h5></strong></p>
+<p><img src="/img/this_7.png" alt="Alt this_7"><br>从上述实验中看到，在new和bind同时使用时，b.name===’qw’。可以得出结论：<strong><em>在new和bind同时使用时，new的优先级更高，this的取值按照构造器方式确定</em></strong></p>
+<p><strong><h5>函数赋值</h5></strong><br><img src="/img/this_8.png" alt="Alt this_8"><br>在上图中有<code>(c=a.logAge)()</code>，打印出的age等于10，由此得出这里的this指向的是window。那么为什么是这样呢？在表达式<code>c=a.logAge</code>中，分为左值c和右值a.logAge。对于左值，js会去作用域链中寻找对应的引用，当找不到时则会创建一个引用；而对于右值，js会去查找并返回引用的值，在上述例子中你可以理解为返回了<code>function (){ console.log(this.age) }</code>。因此表达式相当于<code>(function () { console.log(this.age) })()</code>。</p>
+<p><strong><h3 style="color: #00b0f0">4. 结语</h3></strong></p>
+<p>写完收工。一看表11点了…正是睡觉的好时候。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,7 +265,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -204,74 +278,54 @@
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
 
+  <div style="margin:30px">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="post-javascript探路-this为何物" data-title="javascript探路:this为何物" data-url="2017/04/06/javascript探路-this为何物/index.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"drinkingcrab"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
 
+
+<nav id="article-nav">
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/05/javascript闭包揭秘/" class="archive-article-date">
-  	<time datetime="2017-03-05T13:46:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-05</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/05/javascript闭包揭秘/">javascript闭包揭秘</a>
-    </h1>
+    <a href="/2017/03/05/javascript闭包揭秘/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">javascript闭包揭秘</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">闭包</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/javascript/" class="article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
+</nav>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
+
 
 
   
-  
-    </div></section>
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -294,10 +348,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: true,
 		root: "/",
 		innerArchive: true,
